@@ -73,12 +73,38 @@ const vs = [
 ]
 
 //faces - connects the lines to vertices
-const fs = [
+const edges = [
     [0,1,2,3],
     [4,5,6,7],
     [0,4],[1,5],
     [2,6],[3,7]
 ]
+
+const faces = [
+    { idx: [0,1,2,3], color: "#ff0000" }, // front
+    { idx: [4,5,6,7], color: "#00ff00" }, // back
+    { idx: [0,1,5,4], color: "#0000ff" }, // top
+    { idx: [2,3,7,6], color: "#ffff00" }, // bottom
+    { idx: [1,2,6,5], color: "#ff00ff" }, // left
+    { idx: [0,3,7,4], color: "#00ffff" }  // right
+]
+
+function drawFace(face){
+    const pts = face.idx.map(i =>
+        screen(project(translate_z(rotate_xz(vs[i], angle), dz)))
+    );
+
+    ctx.fillStyle = face.color;
+    ctx.beginPath();
+    ctx.moveTo(pts[0].x, pts[0].y);
+
+    for (let i = 1; i < pts.length; i++) {
+        ctx.lineTo(pts[i].x, pts[i].y);
+    }
+
+    ctx.closePath();
+    ctx.fill();
+}
 
 const FPS = 60;
 let dz = 2; //tracks the offset of z
@@ -92,10 +118,13 @@ function frame(){
     for (const v of vs){
         point(screen(project(translate_z(rotate_xz(v,angle),dz))))
     }
-    for (const f of fs){
-        for(let i =0; i<f.length; ++i){
-            const a = vs[f[i]];
-            const b = vs[f[(i+1)%f.length]];
+    for (const face of faces){
+        drawFace(face);
+    }
+    for (const e of edges){
+        for(let i =0; i<e.length; ++i){
+            const a = vs[e[i]];
+            const b = vs[e[(i+1)%e.length]];
             line(
                 screen(project(translate_z(rotate_xz(a,angle),dz))),
                 screen(project(translate_z(rotate_xz(b,angle),dz)))
