@@ -1,5 +1,5 @@
-const BACKGROUND = "#ffffff"
-let FOREGROUND = "#50FF50"
+let BACKGROUND = "#ffffff"
+let FOREGROUND = "#ff5050"
 
 //console.log(game)
 game.width = 400
@@ -135,10 +135,10 @@ function frame(){
 }//1000 = milisec
 setTimeout(frame, 1000/FPS);
 
-game.addEventListener('mouseenter', () => {
+game.addEventListener('mouseleave', () => {
   FOREGROUND = "#ff5050";
 });
 
-game.addEventListener('mouseleave', () => {
+game.addEventListener('mouseenter', () => {
   FOREGROUND = "#50FF50";
 });

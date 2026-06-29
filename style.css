@@ -2,7 +2,97 @@ body{
     display: flex;
     height: 100vh;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    overflow: hidden;
 }
-#logo {
-    color: red;
+
+#head {
+    color: rgb(255, 0, 0);
+    text-align: center;
+    display: none;
+}
+
+#hello-wrapper {
+  width: 50vw;
+  margin: 25vh auto;
+  filter:
+    drop-shadow(0 0 8px rgba(255, 255, 255, 0.55))
+    drop-shadow(0 0 24px rgba(180, 220, 255, 0.35))
+    drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+}
+
+.hello {
+  fill: none;
+  stroke: url(#glassGradient);
+  stroke-miterlimit: 10;
+  stroke-linecap: round;
+  stroke-width: 3;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: write 5s ease-in-out forwards;
+}
+
+.hello-shimmer {
+  fill: none;
+  stroke: url(#shimmerGradient);
+  stroke-miterlimit: 10;
+  stroke-linecap: round;
+  stroke-width: 1.2;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: write 5s ease-in-out forwards, shimmerPulse 3s ease-in-out infinite 5s;
+  opacity: 0.7;
+}
+
+@keyframes write {
+  from { stroke-dashoffset: 1000; }
+  to   { stroke-dashoffset: 0; }
+}
+
+@keyframes shimmerPulse {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 1.0; }
+}
+
+@keyframes shimmerSlide {
+  0%   { x1: 0%;  x2: 100%; }
+  50%  { x1: 50%; x2: 150%; }
+  100% { x1: 0%;  x2: 100%; }
+}
+
+@keyframes blueShift {
+  0%   { stop-color: rgba(180, 215, 255, 0.75); }
+  33%  { stop-color: rgba(140, 190, 255, 0.90); }
+  66%  { stop-color: rgba(200, 230, 255, 0.50); }
+  100% { stop-color: rgba(180, 215, 255, 0.75); }
+}
+
+@keyframes blueShift2 {
+  0%   { stop-color: rgba(160, 210, 255, 0.80); }
+  33%  { stop-color: rgba(200, 235, 255, 0.45); }
+  66%  { stop-color: rgba(130, 185, 255, 0.95); }
+  100% { stop-color: rgba(160, 210, 255, 0.80); }
+}
+
+.blue-stop-1 {
+  animation: blueShift 4s ease-in-out infinite;
+}
+
+.blue-stop-2 {
+  animation: blueShift2 4s ease-in-out infinite 1.3s;
+}
+
+footer p{
+    color: rgb(255, 0, 0);
+    text-align: center;
+    display: none;
+}
+
+.playwrite-nz {
+  font-family: "Playwrite NZ", cursive;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
 }
